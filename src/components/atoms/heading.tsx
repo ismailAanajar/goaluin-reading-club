@@ -11,7 +11,7 @@ type HeadingProps = {
 
 function Heading({  children, className, ...rest }: HeadingProps) {
 
-  return <h1 className={`capitalize text-[60px] leading-[73px] ${className}`} {...rest}>{children}</h1>;
+  return <h1 className={`capitalize md:text-[60px] text-[40px] leading-[73px] text-center mb-12  ${className} `} {...rest}>{children}</h1>;
 }
 
 export default Heading;
