@@ -4,24 +4,33 @@ import {
   FieldValues,
   useForm,
 } from 'react-hook-form';
+import { z } from 'zod';
 
 import Button from '@/components/atoms/button';
 import Heading from '@/components/atoms/heading';
 import Input from '@/components/atoms/input';
-
-type CredentialsType = {
-  name: string;
-  password: string;
-}
+import { zodResolver } from '@hookform/resolvers/zod';
 
 export default function Login() {
 
-  const {control, handleSubmit} = useForm();
+  const schema = z.object({
+    email: z.string().email(),
+    password: z.string()
+  });
+  const {control, handleSubmit,  setError} = useForm({resolver: zodResolver(schema)});
 
   const onSubmit = (data: FieldValues) => {
     console.log(data);
     
   }
+
+  //  useEffect(() => {
+  //   if (error?.errors) {
+      
+  //     errorHandling({error, setError})
+  //   }
+  // }, [error])
+
   return (
     <section>
       <Heading className='mb-12' >Welcome Back</Heading>
