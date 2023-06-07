@@ -1,16 +1,17 @@
-import React, { ReactNode } from 'react';
+import {
+  HTMLAttributes,
+  ReactNode,
+} from 'react';
 
 type HeadingLevel = 1 | 2;
 
-type HeadingProps<T extends HeadingLevel> = {
-  level: T;
+type HeadingProps = {
   children: ReactNode;
-};
+} & HTMLAttributes<HTMLHeadingElement>
 
-function Heading<T extends HeadingLevel>({ level, children }: HeadingProps<T>) {
-  const HeadingComponent = `h${level}` as keyof JSX.IntrinsicElements;
+function Heading({  children, className, ...rest }: HeadingProps) {
 
-  return <HeadingComponent className='capitalize text-[60px] leading-[73px]'>{children}</HeadingComponent>;
+  return <h1 className={`capitalize text-[60px] leading-[73px] ${className}`} {...rest}>{children}</h1>;
 }
 
 export default Heading;

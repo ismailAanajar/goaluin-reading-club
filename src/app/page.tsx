@@ -8,7 +8,7 @@ export default function Landing() {
   return (
     <main className='flex items-end gap-5'>
       <section className='w-[47%] flex-grow mb-5'>
-        <Heading level={1}>Joining The Reading club</Heading>
+        <Heading >Joining The Reading club</Heading>
         <Button className='uppercase mt-5'>Get started</Button>
       </section>
       <section className='w-[47%] flex-grow text-right flex justify-end'>
