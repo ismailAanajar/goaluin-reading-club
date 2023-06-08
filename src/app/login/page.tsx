@@ -1,5 +1,6 @@
 "use client"
 
+import Link from 'next/link';
 import {
   FieldValues,
   useForm,
@@ -8,18 +9,23 @@ import {
 import Button from '@/components/atoms/button';
 import Heading from '@/components/atoms/heading';
 import Input from '@/components/atoms/input';
+import { useAppDispatch } from '@/store';
+import { signIn } from '@/store/userSlice';
+import withoutAuth from '@/utils/withoutAuth';
 
 type CredentialsType = {
   name: string;
   password: string;
 }
 
-export default function Login() {
+ function Login() {
 
   const {control, handleSubmit} = useForm();
-
+  const dispatch = useAppDispatch()
   const onSubmit = (data: FieldValues) => {
     console.log(data);
+
+    dispatch(signIn(data))
     
   }
   return (
@@ -28,8 +34,16 @@ export default function Login() {
       <form onSubmit={handleSubmit(onSubmit)} className='flex flex-col gap-4 items-center'>
         <Input name='email' type='email' placeholder='john@example.com' control={control}/>
         <Input name='password' type='password' placeholder='password' control={control}/>
-        <Button type='submit'>Login</Button>
+        <div className="flex  justify-between gap-3">
+          <Button type='submit'>Login</Button>
+          <Button className='bg-input_bg text-[#fff]' type='submit'>
+            <Link href='/register'>register</Link>
+          </Button>
+        </div>
       </form>
     </>
   )
 }
+
+
+export default withoutAuth(Login)
