@@ -10,8 +10,9 @@ module.exports = {
       primary: '#120F1C',
       button_bg: '#C8F513',
       input_bg: '#2C273F',
-      input_color: '#ABA2C7'
-      // ...
+      input_color: '#ABA2C7',
+      red: '#f05050'
+      // ...#
     }
   },
   plugins: [],
