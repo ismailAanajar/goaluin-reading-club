@@ -2,6 +2,8 @@ import './globals.css';
 
 import { Inter } from 'next/font/google';
 
+import Providers from '@/components/molecules/Provider';
+
 const inter = Inter({ subsets: ['latin'] })
 
 export const metadata = {
@@ -16,7 +18,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={`${inter.className} px-5 bg-primary min-h-screen flex flex-col justify-center items-center md:px-7 `}><main className='w-full sm:w-auto'>{children}</main></body>
+      <body className={`${inter.className} px-5 bg-primary min-h-screen flex flex-col justify-center items-center md:px-7 `}><main className='w-full sm:w-auto'><Providers>{children}</Providers></main></body>
     </html>
   )
 }

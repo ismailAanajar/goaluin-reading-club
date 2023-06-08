@@ -9,6 +9,7 @@ import Button from '@/components/atoms/button';
 import Heading from '@/components/atoms/heading';
 import Input from '@/components/atoms/input';
 import Textarea from '@/components/atoms/textarea';
+import withAuth from '@/utils/withAuth';
 
 function CreatePost() {
   const {control, handleSubmit} = useForm();
@@ -29,4 +30,4 @@ function CreatePost() {
   )
 }
 
-export default CreatePost
+export default withAuth(CreatePost)
