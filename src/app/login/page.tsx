@@ -1,6 +1,5 @@
 "use client"
 
-import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import {
   FieldValues,
@@ -43,8 +42,8 @@ function Login() {
         <Input name='password' type='password' placeholder='password' control={control}/>
         <div className="flex  justify-between gap-3">
           <Button loading={loading} type='submit'>Login</Button>
-          <Button className='bg-input_bg text-[#fff]' type='submit'>
-            <Link href='/register'>register</Link>
+          <Button href='/register' className='bg-input_bg text-[#fff]' >
+            register
           </Button>
         </div>
       </form>

@@ -17,7 +17,7 @@ const withAuth = (Component: any) => {
     console.log(loading);
     
     useEffect(() => {
-      if (!id && !loading) {
+      if (!id  ) {
         push('/landing')
       }
     }, [id]);

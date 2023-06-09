@@ -49,7 +49,12 @@ function Register() {
         <Input name='name' type='text' placeholder='name' control={control}/>
         <Input name='email' type='email' placeholder='john@example.com' control={control}/>
         <Input name='password' type='password' placeholder='password' control={control}/>
-        <Button type='submit' loading={loading}>Login</Button>
+        <div className="flex  justify-between gap-3">
+          <Button loading={loading} type='submit'>Register</Button>
+          <Button href='/login' className='bg-input_bg !text-[#fff]' >
+            Login
+          </Button>
+        </div>
       </form>
     </section>
   )
