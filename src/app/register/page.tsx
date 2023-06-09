@@ -1,5 +1,6 @@
 "use client"
 
+import { useRouter } from 'next/navigation';
 import {
   FieldValues,
   useForm,
@@ -28,10 +29,9 @@ function Register() {
     password: z.string()
   });
   const {control, handleSubmit,  setError} = useForm({resolver: zodResolver(schema)});
-
+  const {push} = useRouter()
   const onSubmit = (data: FieldValues) => {
-    console.log(data);
-    dispatch(signUp(data))
+    dispatch(signUp(data)).then(() => push('/login'))
     
   }
 

@@ -9,6 +9,7 @@ import bannerImg from '@/public/assets/banner.svg';
 import withoutAuth from '@/utils/withoutAuth';
 
 function Landing() {
+    
   return (
     <main className='flex items-end gap-5'>
       <section className='w-[47%] flex-grow mb-5'>

@@ -1,17 +1,15 @@
 "use client";
 
-import { useRef } from 'react';
+import { useEffect } from 'react';
 
-import { store } from '@/store';
-import { setPosts } from '@/store/postSlice';
+import { useAppDispatch } from '@/store';
+import { getUser } from '@/store/userSlice';
 
-function Preloader({ posts }: { posts: Post[] }) {
-  const loaded = useRef(false);
-  if (!loaded.current) {
-    store.dispatch(setPosts(posts));
-    loaded.current = true;
-  }
-
+function Preloader() {
+  const dispatch = useAppDispatch()
+  useEffect(() =>{
+  dispatch(getUser())
+},[])
   return null;
 }
 

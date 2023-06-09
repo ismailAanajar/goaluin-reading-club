@@ -10,10 +10,7 @@
   },
   "dependencies": {
     "@hookform/resolvers": "^3.1.0",
-<<<<<<< HEAD
-=======
     "@reduxjs/toolkit": "^1.9.5",
->>>>>>> feature/redux-setup
     "@types/node": "20.2.5",
     "@types/react": "18.2.8",
     "@types/react-dom": "18.2.4",

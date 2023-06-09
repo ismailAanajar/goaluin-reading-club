@@ -1,20 +1,29 @@
 "use client"
+
+import Button from '@/components/atoms/button';
 import Post from '@/components/molecules/post';
-import Preloader from '@/components/molecules/preload';
+import {
+  useAppDispatch,
+  useAppSelector,
+} from '@/store';
+import { destroyPost } from '@/store/postSlice';
 import withAuth from '@/utils/withAuth';
 
 async function  Landing() {
-  const res = await fetch('https://jsonplaceholder.typicode.com/posts');
-  const data = await res.json();
-  // store.dispatch(setPosts(data))
+  const posts = useAppSelector(state => state.user.userInfo.posts)
+  const dispatch = useAppDispatch()
+  const postDeleteHandler = (id:number | null) => {
+    dispatch(destroyPost(id))
+  }
+
   return (
-    <main className='flex flex-col gap-5 w-full md:w-auto'>
-        <Preloader posts={data}/>
-       <Post/> 
-       <Post/> 
+    <main className='flex flex-col gap-5 w-full md:w-auto items-center'>
        {
-        // JSON.stringify(store.getState().posts.posts,null,2)
+        posts.map(post => <Post key={post.id} {...post} deletePost={postDeleteHandler}/> )
        }
+       <Button href='/post/create'>
+        New Post
+       </Button>
     </main>
   )
 }

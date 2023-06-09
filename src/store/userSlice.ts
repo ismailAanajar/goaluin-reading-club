@@ -12,14 +12,16 @@ const initialState: User = {
   userInfo:{
     name: null,
   email: null,
+  posts: []
   },
   loading: false,
-  token: null
+  token: null,
+  error: null
 };
-export const getUser = createAsyncThunk('getUser', async (_,{rejectWithValue}) => {
+export const getUser = createAsyncThunk('getUser', async (_,{rejectWithValue, dispatch}) => {
 
   const user = await customAxios.get<User>('profile');
-
+  dispatch(setUser(user.data.userInfo))
    return user.data ; 
 })
 
@@ -54,8 +56,8 @@ const userSlice = createSlice({
   name: "user",
   initialState,
   reducers: {
-    setUser: (state, action: PayloadAction<string>) => {
-      state.userInfo.name = action.payload;
+    setUser: (state, action: PayloadAction<UserInfo>) => {
+      state.userInfo = action.payload;
     },
   },
   extraReducers: builder => {
@@ -81,7 +83,7 @@ const userSlice = createSlice({
     })
     builder.addCase(signIn.rejected, (state, {payload}:any) => {
       state.loading = false;
-      // state.error = payload.error
+      state.error = payload.error
     })
     /**** Sign in */
     

@@ -1,23 +1,64 @@
-import type { PayloadAction } from '@reduxjs/toolkit';
-import { createSlice } from '@reduxjs/toolkit';
+import { FieldValues } from 'react-hook-form';
+
+import customAxios from '@/lib';
+import {
+  createAsyncThunk,
+  createSlice,
+} from '@reduxjs/toolkit';
+
+import { getUser } from './userSlice';
+
+export const createPost = createAsyncThunk('createPost', async (data: FieldValues,{rejectWithValue, dispatch}) => {
+
+  const user = await customAxios.post('post/create', data);
+  dispatch(getUser())
+   return user.data ; 
+})
+export const destroyPost = createAsyncThunk('destroyPost', async (id: number | null,{rejectWithValue, dispatch}) => {
+
+  const user = await customAxios.delete('post/delete/'+id);
+  dispatch(getUser())
+   return user.data ; 
+})
 
 type Posts = {
-  posts: Post[] 
+  loading: boolean 
 }
 
 const initialState: Posts = {
-  posts: []
+  loading: false
 };
 
 const postSlice = createSlice({
   name: "post",
   initialState,
   reducers: {
-    setPosts: (state, action: PayloadAction<Post[]>) => {
-      state.posts = action.payload;
-    },
+    
   },
+  extraReducers: builder => {
+   builder
+      .addCase(createPost.pending, state => {
+        state.loading = true;
+      })
+      .addCase(createPost.fulfilled, (state) => {
+                state.loading = false;
+
+      })
+      .addCase(createPost.rejected, (state, action) => {
+        state.loading = false
+      })
+      .addCase(destroyPost.pending, state => {
+        state.loading = true;
+      })
+      .addCase(destroyPost.fulfilled, (state) => {
+                state.loading = false;
+
+      })
+      .addCase(destroyPost.rejected, (state, action) => {
+        state.loading = false
+      })
+    }   
 });
 
-export const { setPosts } = postSlice.actions;
+export const {  } = postSlice.actions;
 export default postSlice.reducer;

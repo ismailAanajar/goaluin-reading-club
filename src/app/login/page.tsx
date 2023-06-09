@@ -1,6 +1,7 @@
 "use client"
 
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 import {
   FieldValues,
   useForm,
@@ -9,19 +10,22 @@ import {
 import Button from '@/components/atoms/button';
 import Heading from '@/components/atoms/heading';
 import Input from '@/components/atoms/input';
-import { useAppDispatch } from '@/store';
+import {
+  RootState,
+  useAppDispatch,
+  useAppSelector,
+} from '@/store';
 import { signIn } from '@/store/userSlice';
 import withoutAuth from '@/utils/withoutAuth';
 
 function Login() {
+    const loading = useAppSelector((state: RootState) => state.user.loading)
 
   const {control, handleSubmit} = useForm();
   const dispatch = useAppDispatch()
+  const {replace} = useRouter()
   const onSubmit = (data: FieldValues) => {
-    console.log(data);
-
-    dispatch(signIn(data))
-    
+    dispatch(signIn(data)).then(() => replace('/'))
   }
 
   //  useEffect(() => {
@@ -38,7 +42,7 @@ function Login() {
         <Input name='email' type='email' placeholder='john@example.com' control={control}/>
         <Input name='password' type='password' placeholder='password' control={control}/>
         <div className="flex  justify-between gap-3">
-          <Button type='submit'>Login</Button>
+          <Button loading={loading} type='submit'>Login</Button>
           <Button className='bg-input_bg text-[#fff]' type='submit'>
             <Link href='/register'>register</Link>
           </Button>
